@@ -1,9 +1,6 @@
-# Maple
-Backport Cherry and bamboo to 1.19 and add maple tree.
-![Maple](https://s2.loli.net/2023/06/19/JRihYlfdybWqIHs.png)
-![Downloads](https://cf.way2muchnoise.eu/877194.svg)  ![curseforge](https://cf.way2muchnoise.eu/versions/877194.svg)
-
-[![Crowdin](https://badges.crowdin.net/minecraft-maple/localized.svg)](https://crowdin.com/project/minecraft-maple)
+# Cherry Village
+Add Cherry Village for cherry grove.
+![CherryVillage](https://s2.loli.net/2025/01/25/F7PqTBgxLlv9H3C.jpg)
 ## Support
 
 You can reporting issue.
