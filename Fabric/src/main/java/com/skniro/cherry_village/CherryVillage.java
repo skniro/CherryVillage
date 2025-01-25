@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CherryVillage implements ModInitializer {
-    public static final String MOD_ID = "maple";
+    public static final String MOD_ID = "cherry_village";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override

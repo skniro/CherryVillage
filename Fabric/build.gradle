@@ -1,41 +1,22 @@
 plugins {
     id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
+    id 'idea'
 }
 
 version = project.fabric_mod_version
 group = project.maven_group
 
 repositories {
-    maven {
-        url "https://maven.minecraftforge.net/"
-    }
-
-    maven {
-        url = "https://jitpack.io"
-    }
-
-    maven {
-        // location of the maven that hosts JEI files before January 2023
-        name = "Progwml6's maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        url "https://maven.shedaniel.me"
-    }
-    // Add repositories to retrieve artifacts from in here.
-    // You should only use this when depending on other mods because
-    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-    // for more information about repositories.
 }
 
 
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     implementation project(":Common")
     // Fabric API. This is technically optional, but you probably want it anyway.
     //Production environment client test to use
@@ -48,43 +29,37 @@ dependencies {
     //modRuntimeOnly("mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}")
 }
 
+loom {
+    runs {
+        client {
+            client()
+            setConfigName("Fabric Client")
+            ideConfigGenerated(true)
+            runDir("run")
+        }
+        server {
+            server()
+            setConfigName("Fabric Server")
+            ideConfigGenerated(true)
+            runDir("run")
+        }
+    }
+
+}
+
 processResources {
+    from project(":Common").sourceSets.main.resources
     inputs.property "version", project.version
-    filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
 }
 
-def dataOutput = 'src/main/generated'
-
-loom {
-    runs {
-        datagen {
-            server()
-
-            name "Data Generation"
-            vmArg "-Dfabric-api.datagen"
-            vmArg "-Dfabric-api.datagen.output-dir=${file(dataOutput)}"
-
-            runDir "build/datagen"
-        }
-    }
-}
-
-sourceSets { main { resources { srcDirs += dataOutput } } }
 
 def targetJavaVersion = 17
 tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
-    it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release = targetJavaVersion
-    }
+    source(project(":Common").sourceSets.main.allSource)
 }
 
 java {
