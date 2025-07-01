@@ -19,6 +19,6 @@ pluginManagement.repositories {
 }
 
 rootProject.name = 'Cherry_Village-1.21.1'
-include("Common", "Fabric", "Forge", "Neoforge")
+include("Common","Forge")
 
 
