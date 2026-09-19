@@ -23,7 +23,8 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
-rootProject.name = 'Cherry_Village-26.1'
-include("Common", "Fabric", "Forge", "Neoforge")
+rootProject.name = 'Cherry_Village-26.3'
+include("Common", "Fabric", "Neoforge")
+//include("Common", "Fabric", "Forge", "Neoforge")
 
 
