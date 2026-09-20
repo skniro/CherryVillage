@@ -24,7 +24,7 @@ plugins {
 }
 
 rootProject.name = 'Cherry_Village-26.3'
-include("Common", "Fabric", "Neoforge")
-//include("Common", "Fabric", "Forge", "Neoforge")
+//include("Common", "Fabric", "Neoforge")
+include("Common", "Fabric", "Forge", "Neoforge")
 
 
